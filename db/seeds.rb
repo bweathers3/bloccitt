@@ -7,7 +7,7 @@ require 'random_data'
  50.times do
 
    Post.create!(
- 
+
      title:  RandomData.random_sentence,
      body:   RandomData.random_paragraph
    )
@@ -26,6 +26,24 @@ require 'random_data'
    )
  end
 
+########   Create seed data for advertisement
+
+12.times do
+
+  Advertisement.create!(
+
+    title:  RandomData.random_sentence,
+    body:   RandomData.random_paragraph,
+    #price:  RandomData.random_integer
+  )
+end
+advertisements = Advertisement.all
+
+
+########
+
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ ##
+ puts "#{Advertisement.count} advertisements created"
