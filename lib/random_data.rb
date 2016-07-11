@@ -31,4 +31,13 @@
      letters[0,rand(3..8)].join
    end
 
+   ######
+
+   def self.random_integer
+     i_numbers = (1..99)
+     i_numbers.shuffle!
+   end
+
+   ######
+
 end

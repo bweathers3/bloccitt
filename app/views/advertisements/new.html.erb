@@ -1,15 +1,37 @@
 
 
-<%= form_for @advertisement do |f| %>
-   <%= f.label :title %>
-   <%= f.text_field :title %>
 
-   <%= f.label :body %>
-   <%= f.text_area :body %>
+<h1>New Advertisement</h1>
 
+ <div class="row">
+   <div class="col-md-4">
+     <p>Guidelines for Ads</p>
+     <ul>
+       <li>Advertisement price must be valid for 30 days.</li>
+       <li>Prices must be integers.</li>
+     </ul>
+   </div>
+   <div class="col-md-8">
+     <%= form_for @advertisement do |f| %>
+       <div class="form-group">
 
-   <%= f.label :price %>
-   <%= f.text_field :price %>
- 
-   <%= f.submit "Save" %>
- <% end %>
+         <%= f.label :title %>
+         <%= f.text_field :title, class: 'form-control', placeholder: "Enter advertisement title" %>
+       </div>
+
+       <div class="form-group">
+         <%= f.label :body %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter advertisement body" %>
+       </div>
+
+       <div class="form-group">
+         <%= f.label :price %>
+          <%= f.number_field :price, class: 'form-control', placeholder: "Enter advertisement price" %>
+       </div>
+       <div class="form-group">
+
+         <%= f.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>
