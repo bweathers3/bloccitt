@@ -69,19 +69,16 @@ end
 
       describe "GET show" do
         it "returns http success" do
-        # #16
           get :show, {id: my_advertisement.id}
           expect(response).to have_http_status(:success)
         end
         it "renders the #show view" do
-        # #17
           get :show, {id: my_advertisement.id}
           expect(response).to render_template :show
         end
 
         it "assigns my_advertisement to @advertisement" do
           get :show, {id: my_advertisement.id}
-        # #18
           expect(assigns(:advertisement)).to eq(my_advertisement)
         end
       end
