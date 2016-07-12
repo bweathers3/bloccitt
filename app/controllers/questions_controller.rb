@@ -4,21 +4,21 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @questions = Question.new
+    @question = Question.new
   end
 
   def create
 
-    @questions = Question.new
-    @questions.title = params[:question][:title]
-    @questions.body = params[:question][:body]
-    @questions.resolved = params[:question][:resolved]
+    @question = Question.new
+    @question.title = params[:question][:title]
+    @question.body = params[:question][:body]
+    @question.resolved = params[:question][:resolved]
 
 
-   if @questions.save
+   if @question.save
 
      flash[:notice] = "Question was saved successfully."
-     redirect_to @questions
+     redirect_to @question
    else
 
      flash.now[:alert] = "There was an error saving the Question. Please try again."

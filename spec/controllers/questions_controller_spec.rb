@@ -35,19 +35,22 @@ RSpec.describe QuestionsController, type: :controller do
 
     it "instantiates @questions" do
       get :new
-      expect(assigns(:questions)).not_to be_nil
+      expect(assigns(:question)).not_to be_nil
     end
 
   end
 
     ########
-  describe "POST #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+
+    describe "POST #create" do
+
+          it "returns http success" do
+          post :create, question: {title:"Test the Question title", body: "Test the Question body", resolved: "false"}
+            expect(response).to have_http_status(302)
+          end
     end
-  end
-=begin
+
+
   describe "Question create" do
 
       it "increases the number of Question by 1" do
@@ -64,8 +67,8 @@ RSpec.describe QuestionsController, type: :controller do
 
 
 
-  end
 
+=begin
   #########
 
   describe "GET #show" do
