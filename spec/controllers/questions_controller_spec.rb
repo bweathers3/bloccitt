@@ -126,23 +126,23 @@ describe "PUT update" do
     it "updates questions with expected attributes" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
-      new_resolved = "false"
-      put :update, id: my_question.id, post: {title: new_title, body: new_body, resolved: new_resolved}
+      put :update, id: my_question.id, question: {title: new_title, body: new_body}
 
       updated_question = assigns(:question)
       expect(updated_question.id).to eq my_question.id
       expect(updated_question.title).to eq new_title
       expect(updated_question.body).to eq new_body
-      expect(updated_question.resolved).to eq new_resolved
 
     end
   end
 
-end
-    #it "redirects to the updated question" do
-    #  new_title = RandomData.random_sentence
-    #  new_body = RandomData.random_paragraph
 
-  #    put :update, id: my_question.id, question: {title: new_title, body: new_body}
-  #    expect(response).to redirect_to my_question
-    #  end
+    it "redirects to the updated question" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+
+      put :update, id: my_question.id, question: {title: new_title, body: new_body}
+      expect(response).to redirect_to my_question
+      end
+
+end
