@@ -65,39 +65,87 @@ RSpec.describe QuestionsController, type: :controller do
   end
   #########
 
+  describe "GET show" do
+    it "returns http success" do
+      get :show, {id: my_question.id}
+      expect(response).to have_http_status(:success)
+    end
+    it "renders the #show view" do
+      get :show, {id: my_question.id}
+      expect(response).to render_template :show
+    end
+
+    it "assigns my_question to @question" do
+      get :show, {id: my_question.id}
+      expect(assigns(:question)).to eq(my_question)
+    end
+  end
+
+##############
+######################
+
+describe "GET edit" do
+     it "returns http success" do
+       get :edit, {id: my_question.id}
+       expect(response).to have_http_status(:success)
+     end
+
+     it "renders the #edit view" do
+       get :edit, {id: my_question.id}
+       expect(response).to render_template :edit
+     end
 
 
+     it "assigns post to be updated to @question" do
+       get :edit, {id: my_question.id}
+       question_instance = assigns(:question)
+       expect(question_instance.id).to eq my_question.id
+       expect(question_instance.title).to eq my_question.title
+       expect(question_instance.body).to eq my_question.body
+     end
+   end
 
+   #####################
+
+   describe "DELETE destroy" do
+       it "deletes the question" do
+         delete :destroy, {id: my_question.id}
+         count = Question.where({id: my_question.id}).size
+         expect(count).to eq 0
+       end
+
+       it "redirects to questions index" do
+         delete :destroy, {id: my_question.id}
+         expect(response).to redirect_to posts_path
+       end
+     end
+
+#######################
 =begin
-  #########
+describe "PUT update" do
+    it "updates questions with expected attributes" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+      put :update, id: my_question.id, post: {title: new_title, body: new_body}
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  #########
-
-  describe "GET #edit" do
-    it "returns http success" do
-      get :edit
-      expect(response).to have_http_status(:success)
+      updated_question = assigns(:question)
+      expect(updated_question.id).to eq my_question.id
+      expect(updated_question.title).to eq new_title
+      expect(updated_question.body).to eq new_body
     end
 
+    it "redirects to the updated question" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
 
-
-  end
-
-  #########
-
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
+      put :update, id: my_question.id, question: {title: new_title, body: new_body}
+      expect(response).to redirect_to my_question
     end
+
   end
+=end
+=begin
+
 
 #########
 
@@ -107,6 +155,9 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+
+
 =end
 end
 
@@ -125,25 +176,6 @@ RSpec.describe AdvertisementsController, type: :controller do
 
 
 
-
-      describe "GET show" do
-        it "returns http success" do
-        # #16
-          get :show, {id: my_advertisement.id}
-          expect(response).to have_http_status(:success)
-        end
-        it "renders the #show view" do
-        # #17
-          get :show, {id: my_advertisement.id}
-          expect(response).to render_template :show
-        end
-
-        it "assigns my_advertisement to @advertisement" do
-          get :show, {id: my_advertisement.id}
-        # #18
-          expect(assigns(:advertisement)).to eq(my_advertisement)
-        end
-      end
 
 end
 
