@@ -54,7 +54,7 @@ class QuestionsController < ApplicationController
 
   def destroy
 
-    @post = Post.find(params[:id])
+    @question = Question.find(params[:id])
 
     if @question.destroy
       flash[:notice] = "\"#{@question.title}\" was deleted successfully."

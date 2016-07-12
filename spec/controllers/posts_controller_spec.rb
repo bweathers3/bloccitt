@@ -89,16 +89,13 @@ describe "GET edit" do
 
      it "renders the #edit view" do
        get :edit, {id: my_post.id}
-
        expect(response).to render_template :edit
      end
 
 
      it "assigns post to be updated to @post" do
        get :edit, {id: my_post.id}
-
        post_instance = assigns(:post)
-
        expect(post_instance.id).to eq my_post.id
        expect(post_instance.title).to eq my_post.title
        expect(post_instance.body).to eq my_post.body
@@ -121,7 +118,6 @@ describe "PUT update" do
     it "redirects to the updated post" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
-
       put :update, id: my_post.id, post: {title: new_title, body: new_body}
       expect(response).to redirect_to my_post
     end

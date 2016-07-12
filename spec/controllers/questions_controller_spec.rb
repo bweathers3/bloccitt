@@ -121,63 +121,28 @@ describe "GET edit" do
      end
 
 #######################
-=begin
+
 describe "PUT update" do
     it "updates questions with expected attributes" do
       new_title = RandomData.random_sentence
       new_body = RandomData.random_paragraph
-      put :update, id: my_question.id, post: {title: new_title, body: new_body}
+      new_resolved = "false"
+      put :update, id: my_question.id, post: {title: new_title, body: new_body, resolved: new_resolved}
 
       updated_question = assigns(:question)
       expect(updated_question.id).to eq my_question.id
       expect(updated_question.title).to eq new_title
       expect(updated_question.body).to eq new_body
-    end
+      expect(updated_question.resolved).to eq new_resolved
 
-    it "redirects to the updated question" do
-      new_title = RandomData.random_sentence
-      new_body = RandomData.random_paragraph
-
-      put :update, id: my_question.id, question: {title: new_title, body: new_body}
-      expect(response).to redirect_to my_question
-    end
-
-  end
-=end
-=begin
-
-
-#########
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
     end
   end
 
-
-
-=end
 end
+    #it "redirects to the updated question" do
+    #  new_title = RandomData.random_sentence
+    #  new_body = RandomData.random_paragraph
 
-=begin
-
-RSpec.describe AdvertisementsController, type: :controller do
-
-  let(:my_advertisement) { Advertisement.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: 1) }
-
-
-
-
-
-
-
-
-
-
-
-end
-
-
-=end
+  #    put :update, id: my_question.id, question: {title: new_title, body: new_body}
+  #    expect(response).to redirect_to my_question
+    #  end
