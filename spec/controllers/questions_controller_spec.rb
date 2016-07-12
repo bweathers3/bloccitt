@@ -41,13 +41,13 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
     ########
-  describe "GET #create" do
+  describe "POST #create" do
     it "returns http success" do
       get :create
       expect(response).to have_http_status(:success)
     end
   end
-
+=begin
   describe "Question create" do
 
       it "increases the number of Question by 1" do
@@ -62,7 +62,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
   #########
 
-=begin
+
 
   end
 
