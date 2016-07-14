@@ -74,7 +74,52 @@ describe "GET edit" do
      end
    end
 
-#######################
 
+#######################
+describe "PUT update" do
+    it "updates sponsored_post with expected attributes" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+      put :update, topic_id: my_topic.id, id: my_sponsored_post.id, sponsored_post: {title: new_title, body: new_body}
+
+      updated_sponsored_post = assigns(:sponsored_post)
+      expect(updated_sponsored_post.id).to eq my_sponsored_post.id
+      expect(updated_sponsored_post.title).to eq new_title
+      expect(updated_sponsored_post.body).to eq new_body
+    end
+
+    it "redirects to the updated sponsored post" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+
+      put :update, topic_id: my_topic.id, id: my_sponsored_post.id, sponsored_post: {title: new_title, body: new_body}
+      expect(response).to redirect_to [my_topic, my_sponsored_post]
+    end
+
+end
+
+#####################
+
+    describe "POST create for sponsored post" do
+      it "increases the number of Sponsored Post by 1" do
+          expect{post :create, topic_id: my_topic.id, sponsored_post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(SponsoredPost,:count).by(1)
+      end
+
+
+      it "assigns the new sponsored post to @sponsored_post" do
+          post :create, topic_id: my_topic.id, sponsored_post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
+          expect(assigns(:sponsored_post)).to eq SponsoredPost.last
+      end
+
+      it "redirects to the new sponsored post" do
+
+          post :create, topic_id: my_topic.id, sponsored_post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
+          expect(response).to redirect_to [my_topic, SponsoredPost.last]
+
+      end
+    end
+
+
+######################
 
 end
