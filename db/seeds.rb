@@ -34,7 +34,7 @@ require 'random_data'
 
               body: "Final try on the test of the seed data for idempotence")
 
-   Comment.where(post: "Final try at Unique record in post to test idempotence").find_or_create_by(body: "Seed data for idempotence test")
+   Comment.where(post: "Final try at Unique record in post to test idempotence").first_or_create(body: "Seed data for idempotence test")
 
 
  rescue ActiveRecord::RecordNotUnique
