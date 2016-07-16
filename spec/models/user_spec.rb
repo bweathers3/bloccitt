@@ -37,6 +37,17 @@ RSpec.describe User, type: :model do
           expect(user_with_invalid_email).to_not be_valid
         end
 
+
+    end
+
+    describe "callback name check" do
+
+        it "expect all names in name to be capitalize" do
+          user.name = "test for user name caps"
+          user.save
+          expect(user.name).to eq "Test For User Name Caps"
+        end
+
     end
 
 
