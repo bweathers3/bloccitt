@@ -28,7 +28,7 @@ require 'random_data'
 
  # Create or find a unique record in the seeds data
 
-=begin
+begin
   begin
 
     Post.find_or_create_by(title: "Final try at Unique record in post to test idempotence",
@@ -42,11 +42,11 @@ require 'random_data'
 
 
   end
-=end
+end
 # "Final try at Unique record in post to test idempotence"
 =begin
 
- begin
+  begin
 
    Post.find_or_create_by(title: "Final try at Unique record in post to test idempotence",
 
