@@ -28,40 +28,14 @@ require 'random_data'
 
  # Create or find a unique record in the seeds data
 
-begin
-  begin
 
-    Post.find_or_create_by(title: "Final try at Unique record in post to test idempotence",
+    unique_post = Post.find_or_create_by(title: "Final try at Unique record in post to test idempotence", body: "Final try on the test of the seed data for idempotence")
 
-               body: "Final try on the test of the seed data for idempotence")
-
-    Comment.where(post: "Final try at Unique record in post to test idempotence").first_or_create(body: "Seed data for idempotence test")
+    Comment.find_or_create_by(post: unique_post, body: "Seed data for idempotence test")
 
 
-  rescue ActiveRecord::RecordNotUnique
 
 
-  end
-end
-# "Final try at Unique record in post to test idempotence"
-=begin
-
-  begin
-
-   Post.find_or_create_by(title: "Final try at Unique record in post to test idempotence",
-
-              body: "Final try on the test of the seed data for idempotence")
-
-              Comment.find_or_create_by(post: "Final try at Unique record in post to test idempotence",
-
-                    body: "Seed data for idempotence test")
-
-
- rescue ActiveRecord::RecordNotUnique
-
-
- end
-=end
 
  puts "Seed finished"
  puts "#{Post.count} posts created"
