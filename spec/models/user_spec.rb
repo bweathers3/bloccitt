@@ -22,9 +22,9 @@ RSpec.describe User, type: :model do
      it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
      describe "attributes" do
-       it "should have name and email attributes" do
-         expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
-       end
+            it "should have name and email attributes" do
+              expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
+            end
 
 ###########
             it "responds to role" do
