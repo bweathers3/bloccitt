@@ -1,13 +1,14 @@
 require 'rails_helper'
+#### line below is Richard's code
 include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
-
+  #### line below is Richard's code
   let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin) }
 
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
-
+#### 3 lines below is Richard's code
     before do
       create_session(my_user)
     end
