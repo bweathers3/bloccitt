@@ -7,7 +7,6 @@ require 'random_data'
 # Create Users
  5.times do
    User.create!(
- # #3
    name:     RandomData.random_name,
    email:    RandomData.random_email,
    password: RandomData.random_sentence
@@ -48,6 +47,7 @@ topics = Topic.all
    )
  end
 
+
  # Create an admin user
  admin = User.create!(
    name:     'Admin User',
@@ -62,6 +62,8 @@ topics = Topic.all
    email:    'member@example.com',
    password: 'helloworld'
  )
+
+
 
  puts "Seed finished"
  puts "#{User.count} users created"

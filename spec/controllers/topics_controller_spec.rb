@@ -1,8 +1,18 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
 
+  let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin) }
+
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+
+
+    before do
+      create_session(my_user)
+    end
+
+
 
   describe "GET index" do
     it "returns http success" do
@@ -66,6 +76,7 @@ RSpec.describe TopicsController, type: :controller do
          expect(response).to redirect_to Topic.last
        end
      end
+
   ###########
 
      describe "GET edit" do

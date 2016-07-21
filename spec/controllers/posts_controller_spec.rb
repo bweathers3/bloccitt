@@ -121,6 +121,14 @@ context "signed-in user" do
 
 ######################
 
+
+context "signed-in user" do
+  before do
+    create_session(my_user)
+  end
+
+#############################
+
 describe "GET show" do
     it "returns http success" do
       get :show, topic_id: my_topic.id, id: my_post.id
