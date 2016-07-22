@@ -8,6 +8,8 @@ RSpec.describe TopicsController, type: :controller do
 # Richard added line below
   let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin) }
 
+  let(:my_user2) { User.create!(name: "Bloccit User 2", email: "user2@bloccit.com", password: "hiworld", role: :moderator) }
+
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
 
 # Richard added lines below; 3
@@ -15,7 +17,11 @@ RSpec.describe TopicsController, type: :controller do
       create_session(my_user)
     end
 
-
+#=begin
+       before do
+         create_session(my_user2)
+       end
+#=end
 
   describe "GET index" do
     it "returns http success" do

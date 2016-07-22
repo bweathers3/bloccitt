@@ -56,6 +56,14 @@ topics = Topic.all
    role:     'admin'
  )
 
+ # Create an moderator user
+ moderator = User.create!(
+   name:     'Moderator User',
+   email:    'admin2@example.com',
+   password: 'hioworld',
+   role:     'moderator'
+ )
+
  # Create a member
  member = User.create!(
    name:     'Member User',
