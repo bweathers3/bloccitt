@@ -11,6 +11,7 @@ RSpec.describe PostsController, type: :controller do
 ###########################
 
 
+
    context "guest user" do
      #######################
      describe "GET show" do
