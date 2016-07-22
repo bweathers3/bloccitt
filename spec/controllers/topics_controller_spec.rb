@@ -1,14 +1,10 @@
 require 'rails_helper'
 
-#### line below is Richard's code
-include SessionsHelper
-
-RSpec.describe TopicsController, type: :controller do
-
 # Richard added line below
 include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
+
 # Richard added line below
   let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin) }
 
