@@ -22,7 +22,9 @@ class TopicsController < ApplicationController
    def create
 
     @topic = Topic.new(topic_params)
+    ####
 
+    if current_user.admin? then
      if @topic.save
        flash[:notice] = "Topic was saved successfully."
        redirect_to @topic
@@ -30,6 +32,8 @@ class TopicsController < ApplicationController
        flash.now[:alert] = "Error creating topic. Please try again."
        render :new
      end
+   end
+   ###
    end
 
    def edit
@@ -51,18 +55,24 @@ class TopicsController < ApplicationController
        flash.now[:alert] = "Error saving topic. Please try again."
        render :edit
      end
+
    end
 
    def destroy
      @topic = Topic.find(params[:id])
+     ######
+     if current_user.admin? then
 
-     if @topic.destroy
-       flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-       redirect_to action: :index
-     else
-       flash.now[:alert] = "There was an error deleting the topic."
-       render :show
-     end
+       if @topic.destroy
+        flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+        redirect_to action: :index
+      else
+        flash.now[:alert] = "There was an error deleting the topic."
+        render :show
+      end
+
+    end
+   ###
    end
 
 ##########

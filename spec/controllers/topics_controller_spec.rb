@@ -17,9 +17,10 @@ RSpec.describe TopicsController, type: :controller do
       create_session(my_user)
     end
 
-       before do
-         create_session(my_user2)
-       end
+
+
+
+
 
   describe "GET index" do
     it "returns http success" do
