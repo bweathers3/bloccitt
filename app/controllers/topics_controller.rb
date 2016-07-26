@@ -19,12 +19,19 @@ class TopicsController < ApplicationController
        @topic = Topic.new
    end
 
+
+   def edit
+        @topic = Topic.find(params[:id])
+   end
+
+
+
    def create
 
+  ####
+  if current_user.admin? then
     @topic = Topic.new(topic_params)
-    ####
-
-    if current_user.admin? then
+  
      if @topic.save
        flash[:notice] = "Topic was saved successfully."
        redirect_to @topic
@@ -34,10 +41,6 @@ class TopicsController < ApplicationController
      end
    end
    ###
-   end
-
-   def edit
-     @topic = Topic.find(params[:id])
    end
 
 
@@ -57,6 +60,8 @@ class TopicsController < ApplicationController
      end
 
    end
+
+
 
    def destroy
      @topic = Topic.find(params[:id])
@@ -81,10 +86,11 @@ class TopicsController < ApplicationController
       def topic_params
         params.require(:topic).permit(:name, :description, :public)
       end
+
 ##########
 
    def authorize_user
-     unless current_user.admin? || current_user.moderator?
+     unless  current_user.moderator? || current_user.admin?
        flash[:alert] = "You must be an admin to do that."
        redirect_to topics_path
      end

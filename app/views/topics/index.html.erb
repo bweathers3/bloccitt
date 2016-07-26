@@ -22,7 +22,9 @@
 
   <% if user_is_authorized_for_topics? %>
    <div class="col-md-4">
+     <% if current_user.admin? %>
      <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+     <% end %>
    </div>
   <% end %>
  </div>
