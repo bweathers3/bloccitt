@@ -2,15 +2,17 @@ class CommentsController < ApplicationController
 
   before_action :require_sign_in
 
-  before_action :authorize_user, only: [:destroy]
+  before_action :authorize_user, only: [:create, :destroy]
 
      def create
 
-        #if comment_params.has_key?(:post_id)
+       comment = Comments.new(comment_params)
+       comment.user = current_user
+
+        if params.has_key?(:post_id)
 
           @post = Post.find(params[:post_id])
-           comment = @post.comments.new(comment_params)
-           comment.user = current_user
+           @post.comments << comment
 
            if comment.save
              flash[:notice] = "Comment saved successfully."
@@ -20,9 +22,20 @@ class CommentsController < ApplicationController
              redirect_to [@post.topic, @post]
            end
 
-         #else
+         else
 
-         #end
+           @topic = Topic.find(params[:topic_id])
+            @topic.comments << comment
+
+            if comment.save
+              flash[:notice] = "Comment saved successfully."
+              redirect_to [@topic, @topic]
+            else
+              flash[:alert] = "Comment failed to save."
+              redirect_to [@topic, @topic]
+            end
+
+         end
 
     end
 
@@ -31,6 +44,9 @@ class CommentsController < ApplicationController
 
 
          def destroy
+
+           if params.has_key?(:post_id)
+
               @post = Post.find(params[:post_id])
               comment = @post.comments.find(params[:id])
 
@@ -41,7 +57,23 @@ class CommentsController < ApplicationController
                 flash[:alert] = "Comment couldn't be deleted. Try again."
                 redirect_to [@post.topic, @post]
               end
-            end
+
+            else
+
+              @topic = Topic.find(params[:topic_id])
+              comment = @post.comments.find(params[:id])
+
+              if comment.destroy
+                flash[:notice] = "Comment was deleted successfully."
+                redirect_to [@topic, @topic]
+              else
+                flash[:alert] = "Comment couldn't be deleted. Try again."
+                redirect_to [@topic, @topic]
+              end
+
+          end
+
+    end
 
 
 
