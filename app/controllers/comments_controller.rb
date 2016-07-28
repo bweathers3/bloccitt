@@ -4,15 +4,20 @@ class CommentsController < ApplicationController
 
   before_action :authorize_user, only: [:create, :destroy]
 
+#  @post = Post.find(params[:post_id])
+# comment = @post.comments.new(comment_params)
+ #comment.user = current_user
+
+
      def create
 
-       comment = Comments.new(comment_params)
-       comment.user = current_user
+       comment = Comments.new(comment_params) # moved up
+       comment.user = current_user # moved up
 
         if params.has_key?(:post_id)
 
-          @post = Post.find(params[:post_id])
-           @post.comments << comment
+          @post = Post.find(params[:post_id]) ## stayed
+           @post.comments << comment #added
 
            if comment.save
              flash[:notice] = "Comment saved successfully."
@@ -45,10 +50,11 @@ class CommentsController < ApplicationController
 
          def destroy
 
+             comment = Comments.comments.find(params[:id])
+
            if params.has_key?(:post_id)
 
               @post = Post.find(params[:post_id])
-              comment = @post.comments.find(params[:id])
 
               if comment.destroy
                 flash[:notice] = "Comment was deleted successfully."
@@ -61,7 +67,6 @@ class CommentsController < ApplicationController
             else
 
               @topic = Topic.find(params[:topic_id])
-              comment = @post.comments.find(params[:id])
 
               if comment.destroy
                 flash[:notice] = "Comment was deleted successfully."
@@ -86,7 +91,7 @@ class CommentsController < ApplicationController
 
 
         def authorize_user
-          comment = Comment.find(params[:id])
+          comment = Comment.comment.find(params[:id])
           unless current_user == comment.user || current_user.admin?
             flash[:alert] = "You do not have permission to delete a comment."
             redirect_to [comment.post.topic, comment.post]
