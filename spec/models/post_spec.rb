@@ -39,6 +39,27 @@ RSpec.describe Post, type: :model do
 
          end
      end
+#################
+
+describe "create_vote callback" do
+
+  it "triggers create_vote" do
+    post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+    expect(post).to receive(:create_vote)
+    post.save!
+  end
+
+  it "checks first value for 1" do
+    expect(post.votes.first.value).to eq(1)
+    expect(post.votes.first.user).to eq(post.user)
+  end
+
+  it "checks author as user" do
+    expect(post.votes.first.user).to eq(post.user)
+  end
+
+end
+
 
   describe "voting" do
 
@@ -86,6 +107,8 @@ RSpec.describe Post, type: :model do
              expect(post.rank).to eq (old_rank - 1)
            end
      end
+
+
 
 
 
