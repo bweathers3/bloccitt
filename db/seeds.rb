@@ -38,8 +38,8 @@ topics = Topic.all
 
 
 
-   #posts.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
-   #rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
+   posts.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+   rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 
    posts = Post.all
 
@@ -60,7 +60,7 @@ topics = Topic.all
  # Create an admin user
  admin = User.create!(
    name:     'Admin User',
-   email:    'admin@example.com',
+   email:    'admin2@example.com',
    password: 'helloworld',
    role:     'admin'
  )
@@ -68,7 +68,7 @@ topics = Topic.all
  # Create a member
  member = User.create!(
    name:     'Member User',
-   email:    'member@example.com',
+   email:    'member2@example.com',
    password: 'helloworld'
  )
 
