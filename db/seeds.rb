@@ -24,6 +24,8 @@ end
 topics = Topic.all
 
 ################
+
+
  50.times do
 
     post = Post.create!(
@@ -36,10 +38,10 @@ topics = Topic.all
 
 
 
-   post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
-   rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
+   #posts.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+   #rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 
-   post = Post.all
+   posts = Post.all
 
 
 
