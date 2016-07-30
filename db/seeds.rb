@@ -36,14 +36,10 @@ topics = Topic.all
    )
  end
 
+    #post.update_attributes(:created_at, rand(10.minutes .. 1.year).ago)
+    #rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 
-
-   posts.update_attributes(:created_at, rand(10.minutes .. 1.year).ago)
-   rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
-
-   posts = Post.all
-
-
+    posts = Post.all
 
  # Create seed data for Comments; post has many comments
 
@@ -60,7 +56,7 @@ topics = Topic.all
  # Create an admin user
  admin = User.create!(
    name:     'Admin User',
-   email:    'admin2@example.com',
+   email:    'admin@example.com',
    password: 'helloworld',
    role:     'admin'
  )
@@ -68,7 +64,7 @@ topics = Topic.all
  # Create a member
  member = User.create!(
    name:     'Member User',
-   email:    'member2@example.com',
+   email:    'member@example.com',
    password: 'helloworld'
  )
 
