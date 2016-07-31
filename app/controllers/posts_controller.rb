@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
       if @post.save
         @post.labels = Label.update_labels(params[:post][:labels])
-        flash[:notice] = "Post was saved successfully."
+        flash[:notice] = "Post was saved successfully. You have also been favorited for this post."
         redirect_to [@post.topic, @post]
       else
 
