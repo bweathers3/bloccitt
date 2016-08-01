@@ -56,6 +56,7 @@ class CommentsController < ApplicationController
            if params.has_key?(:post_id)
 
               @post = Post.find(params[:post_id])
+              comment = @post.comments.find(params[:id])
 
               if comment.destroy
                 flash[:notice] = "Comment was deleted successfully."
@@ -68,6 +69,7 @@ class CommentsController < ApplicationController
             else
 
               @topic = Topic.find(params[:topic_id])
+              comment = @topic.comments.find(params[:id])
 
               if comment.destroy
                 flash[:notice] = "Comment was deleted successfully."
@@ -93,7 +95,7 @@ class CommentsController < ApplicationController
 
         def authorize_user
 
-          comment = Comment.find(params[:topic_id])
+          params.has_key?(:post_id) ?  comment = Comment.find(params[:post_id])  : comment = Comment.find(params[:topic_id])
           unless current_user == comment.user || current_user.admin?
             flash[:alert] = "You do not have permission to delete a comment."
             redirect_to [comment.post.topic, comment.post]
