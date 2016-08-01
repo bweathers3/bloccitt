@@ -2,7 +2,9 @@ class CommentsController < ApplicationController
 
   before_action :require_sign_in
 
-  before_action :authorize_user, only: [:create, :destroy]
+  before_action :authorize_user, only: [:destroy]
+
+  #before_action :authorize_user, only: [:create, :destroy]
 
 #  @post = Post.find(params[:post_id])
 # comment = @post.comments.new(comment_params)
@@ -11,7 +13,7 @@ class CommentsController < ApplicationController
 
      def create
 
-       comment = Comments.new(comment_params) # moved up
+       comment = Comment.new(comment_params) # moved up
        comment.user = current_user # moved up
 
         if params.has_key?(:post_id)
@@ -34,10 +36,10 @@ class CommentsController < ApplicationController
 
             if comment.save
               flash[:notice] = "Comment saved successfully."
-              redirect_to [@topic, @topic]
+              redirect_to [@topic]
             else
               flash[:alert] = "Comment failed to save."
-              redirect_to [@topic, @topic]
+              redirect_to [@topic]
             end
 
          end
@@ -50,7 +52,6 @@ class CommentsController < ApplicationController
 
          def destroy
 
-             comment = Comment.comments.find(params[:id])
 
            if params.has_key?(:post_id)
 
@@ -70,10 +71,10 @@ class CommentsController < ApplicationController
 
               if comment.destroy
                 flash[:notice] = "Comment was deleted successfully."
-                redirect_to [@topic, @topic]
+                redirect_to [@topic]
               else
                 flash[:alert] = "Comment couldn't be deleted. Try again."
-                redirect_to [@topic, @topic]
+                redirect_to [@topic]
               end
 
           end
@@ -92,7 +93,7 @@ class CommentsController < ApplicationController
 
         def authorize_user
 
-          comment = Comment.find(params[:id])
+          comment = Comment.find(params[:topic_id])
           unless current_user == comment.user || current_user.admin?
             flash[:alert] = "You do not have permission to delete a comment."
             redirect_to [comment.post.topic, comment.post]
