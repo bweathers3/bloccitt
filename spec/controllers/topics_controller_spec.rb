@@ -9,7 +9,9 @@ RSpec.describe TopicsController, type: :controller do
   let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :admin) }
 
   let(:my_topic) { create(:topic) }
-  
+
+  let(:my_private_topic) { create(:topic, public: false) }
+
 # Richard added lines below; 3
     before do
       create_session(my_user)
@@ -27,6 +29,11 @@ RSpec.describe TopicsController, type: :controller do
       get :index
       expect(assigns(:topics)).to eq([my_topic])
     end
+
+    it "does not include private topics in @topics" do
+         get :index
+         expect(assigns(:topics)).not_to include(my_private_topic)
+       end
   end
 
   ###########
