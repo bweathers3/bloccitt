@@ -3,7 +3,7 @@
 FactoryGirl.define do
 
   factory :label do
-    name RandomData.random_name
+    name RandomData.random_word
   end
 
  end

@@ -3,9 +3,7 @@
 FactoryGirl.define do
 
   factory :comment do
-    body RandomData.random_paragraph
-    post
-    user
+    body RandomData.random_sentence
   end
 
  end

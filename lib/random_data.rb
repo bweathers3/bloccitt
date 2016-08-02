@@ -35,10 +35,18 @@
    end
 
 
-
    def self.random_word
      letters = ('a'..'z').to_a
      letters.shuffle!
      letters[0,rand(3..8)].join
    end
+
+   def self.random_vote
+   	 vote = 0
+       value = (0..1).to_a
+       value.shuffle!
+       value[1] == 0 ?		vote = -1 : vote = 1
+   end
+
+
  end
