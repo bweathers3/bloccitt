@@ -31,20 +31,15 @@
 
  <h2>Favorites</h2>
 
+<% if favorite = Favorite.where(user_id: @user) %>
+<div class="media">
+   <div class="media-body">
+     <h4 class="media-heading">
+      <%= link_to [post, favorite] %>
+     </h4>
 
-
-<%=  @user.favorites.each  do |favorite| %>
-
-   <div class="media">
-     <div class="media-body">
-       <h4 class="media-heading">
-
-         <%= link_to @user.favorites.post, post %>
-       </h4>
-       <small>
-         <%= post.body %>
-       </small>
-     </div>
    </div>
+ </div>
+
  <% end %>
 </div>
