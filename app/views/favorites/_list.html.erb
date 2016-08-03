@@ -1,0 +1,16 @@
+
+
+
+
+
+
+ <% favorites.each do |favorite| %>
+<div class="media">
+   <div class="media-body">
+     <small>
+       <%= post.title %> posted by  <%= post_user.name %>  <br/> <%= image_tag post_user.avatar_url(36), class: "gravatar" %>
+     </small>
+     <p><%= post.body %></p>
+   </div>
+ </div>
+ <% end %>

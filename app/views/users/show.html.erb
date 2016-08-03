@@ -32,14 +32,9 @@
  <h2>Favorites</h2>
 
 <% if favorite = Favorite.where(user_id: @user) %>
-<div class="media">
-   <div class="media-body">
-     <h4 class="media-heading">
-      <%= link_to [post, favorite] %>
-     </h4>
 
-   </div>
- </div>
+  <%= render partial: "favorites/list", locals:{comments: @post.favorites, parent: @post} %>
 
  <% end %>
+ 
 </div>
