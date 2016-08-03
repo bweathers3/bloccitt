@@ -31,10 +31,10 @@
 
  <h2>Favorites</h2>
 
-<% if favorite = Favorite.where(user_id: @user) %>
+<% if @favorite = Favorite.where(user_id: @user) %>
 
-  <%= render partial: "favorites/list", locals:{comments: @post.favorites, parent: @post} %>
+  <%= render partial: "favorites/list", locals:{comments: @post.favorites, parent: @favorite} %>
 
  <% end %>
- 
+
 </div>
