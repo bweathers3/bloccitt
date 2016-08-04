@@ -5,8 +5,9 @@
 
 
  <% favorites.each do |favorite| %>
-      <%= post2 = favorite.post %>
-      <%= user2 = favorite.post.user %>
+      <% post2 = favorite.post %>
+      <% user2 = favorite.post.user %>
+
 <div class="media">
    <div class="media-body">
      <small>
