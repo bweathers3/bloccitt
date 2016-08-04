@@ -8,7 +8,8 @@ require 'rails_helper'
   let(:user) { create(:user) }
   let(:post) { create(:post) }
   let(:label1) { create(:label) }
-  let(:label2) { create(:label) }
+  #let(:label2) { create(:label) }
+  let(:label2) { Label.create!(name: 'Label2') }
 
    it { is_expected.to have_many :labelings }
    it { is_expected.to have_many(:topics).through(:labelings) }
