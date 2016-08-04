@@ -5,12 +5,28 @@
 
 
  <% favorites.each do |favorite| %>
+      <%= post2 = favorite.post %>
+      <%= user2 = favorite.post.user %>
 <div class="media">
    <div class="media-body">
      <small>
-       <%= post.title %> posted by  <%= post_user.name %>  <br/> <%= image_tag post_user.avatar_url(36), class: "gravatar" %>
+       <%= post2.title %> posted by  <%= user2.name %> <%= image_tag user2.avatar_url(36), class: "gravatar" %>
      </small>
-     <p><%= post.body %></p>
+     <p><%= post2.body %></p>
    </div>
  </div>
  <% end %>
+
+
+<!--
+ <% favorites.each do |favorite| %>
+<div class="media">
+   <div class="media-body">
+     <small>
+       <%= favorite.post.title %> posted by  <%= favorite.post.user.name %>  <br/> <%= image_tag favorite.post.user.avatar_url(36), class: "gravatar" %>
+     </small>
+     <p><%= favorite.post.body %></p>
+   </div>
+ </div>
+ <% end %>
+-->

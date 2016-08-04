@@ -33,7 +33,7 @@
 
 <% if @favorite = Favorite.where(user_id: @user) %>
 
-  <%= render partial: "favorites/list", locals:{comments: @post.favorites, parent: @favorite} %>
+  <%= render partial: "favorites/list", locals:{favorites: @user.favorites, parent: @favorite} %>
 
  <% end %>
 
