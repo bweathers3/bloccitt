@@ -43,10 +43,10 @@ end
 def down_vote
     update_vote(-1)
     redirect_to :back
-  end
+end
 
   private
-  
+
   def update_vote(new_value)
     @post = Post.find(params[:post_id])
     @vote = @post.votes.where(user_id: current_user.id).first
@@ -56,6 +56,12 @@ def down_vote
     else
       @vote = current_user.votes.create(value: new_value, post: @post)
     end
+
+    respond_to do |format|
+       format.html
+       format.js
+    end
+    
   end
 
 
