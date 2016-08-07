@@ -165,7 +165,6 @@ describe "GET edit" do
        get :edit, topic_id: my_topic.id, id: my_post.id
 
        post_instance = assigns(:post)
-
        expect(post_instance.id).to eq my_post.id
        expect(post_instance.title).to eq my_post.title
        expect(post_instance.body).to eq my_post.body

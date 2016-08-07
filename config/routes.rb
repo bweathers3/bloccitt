@@ -31,6 +31,17 @@ Rails.application.routes.draw do
      namespace :v1 do
        resources :users, only: [:index, :show]
        resources :topics, only: [:index, :show]
+       resources :posts, only: [:index, :show]
+       resources :comments, only: [:index, :show]
+=begin
+       resources :topics do
+          resources :posts, only: [:index, :show]
+       end
+
+       resources :posts do
+         resources :comments, only: [:index, :show]
+       end
+=end
      end
    end
 

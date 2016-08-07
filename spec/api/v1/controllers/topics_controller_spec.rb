@@ -6,7 +6,7 @@ require 'rails_helper'
    let(:my_user) { create(:user) }
    let(:my_topic) { create(:topic) }
 
-########
+ 
    context "unauthenticated user" do
      it "GET index returns http success" do
        get :index
@@ -18,9 +18,6 @@ require 'rails_helper'
        expect(response).to have_http_status(:success)
      end
    end
-
-
-######
 
    context "unauthorized user" do
      before do
