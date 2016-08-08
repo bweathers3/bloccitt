@@ -1,5 +1,5 @@
 
-
+require 'rails_helper'
 
 class Api::V1::PostsController < Api::V1::BaseController
 
@@ -23,11 +23,8 @@ class Api::V1::PostsController < Api::V1::BaseController
 
    def create
 
-     @topic = Topic.find(params[:topic_id])
-     @post = @topic.posts.build(post_params)
-     @post.user = current_user
-
-     post = Post.new(post_params)
+     topic = Topic.find(params[:topic_id])
+     post = topic.posts.build(post_params)
      post.assign_attributes(post_params)
 
      if post.valid?
@@ -56,6 +53,13 @@ class Api::V1::PostsController < Api::V1::BaseController
 
 
   private
+
       def post_params
         params.require(:POST).permit(:title, :body)
       end
+
+end
+
+      #@topic = Topic.find(params[:id])
+      #render json: topic, status: 200
+      #render :json => @topic.to_json( :include =>  :posts ), status: 200

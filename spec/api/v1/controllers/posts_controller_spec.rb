@@ -26,12 +26,14 @@ require 'rails_helper'
        delete :destroy, topic_id: my_topic.id, id: my_post.id
        expect(response).to have_http_status(401)
      end
+
    end
 
 
 ######
 
    context "unauthorized user" do
+
      before do
        controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
      end
@@ -67,6 +69,7 @@ require 'rails_helper'
 
    describe "PUT update" do
      before { put :update, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} }
+
 
      it "returns http success" do
        expect(response).to have_http_status(:success)
@@ -122,3 +125,5 @@ require 'rails_helper'
     end
 
  end
+ end
+ 
