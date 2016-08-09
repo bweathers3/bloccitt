@@ -36,10 +36,6 @@ class Post < ActiveRecord::Base
      new_rank = points + age_in_days
      update_attribute(:rank, new_rank)
 
-     respond_to do |format|
-       format.html
-       format.js
-     end
    end
 
 end
