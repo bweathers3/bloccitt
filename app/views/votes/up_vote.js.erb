@@ -4,7 +4,7 @@
     <div><%= link_to " ", post_up_vote_path(@post), class: 'glyphicon glyphicon-chevron-up', method: :post, remote: true %></div>
    <div><strong>
    $('#vote-<%= @vote.id %>').hide();
-   $('.js-votes').html("<%= @votes.value.sum %>")
+   <div class='js-votes-total'><%= Vote.find(params[:id]) %></div>
    </strong></div>
    <div><%= link_to " ", post_down_vote_path(@post), class: 'glyphicon glyphicon-chevron-down', method: :post, remote: true %></div>
  </div>

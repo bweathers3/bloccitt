@@ -28,19 +28,14 @@ end
 
   def update_vote(new_value)
     @post = Post.find(params[:post_id])
-    #@vote = @post.votes.where(user_id: @vote.id).first
     @vote = @post.votes.where(user_id: current_user.id).first
+
     if @vote
       @vote.update_attribute(:value, new_value)
     else
       @vote = current_user.votes.create(value: new_value, post: @post)
     end
 
-    #respond_to do |format|
-    #   format.html
-    #   format.js
-    #end
-
-  end
+    end
 
 end
