@@ -4,7 +4,7 @@
 <div class="vote-arrows pull-left">
     <div><%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-chevron-up', method: :post, remote: true %></div>
    <div><strong>
-     <div class='js-votes-total'><%= post.points %></div>
+     <div id="post-<%= post.id %>-votes"><%= post.points %></div>
    </strong></div>
    <div><%= link_to " ", post_down_vote_path(post), class: 'glyphicon glyphicon-chevron-down', method: :post, remote: true %></div>
  </div>
