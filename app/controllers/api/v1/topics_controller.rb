@@ -33,10 +33,10 @@ class Api::V1::TopicsController < Api::V1::BaseController
      topic = Topic.new(topic_params)
 
      if topic.valid?
-       topic.save!
-       render json: topic, status: 201
+        topic.save!
+        render json: topic, status: 201
      else
-       render json: {error: "Topic is invalid", status: 400}, status: 400
+        render json: {error: "Topic is invalid", status: 400}, status: 400
      end
 
    end

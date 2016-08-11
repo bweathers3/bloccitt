@@ -14,8 +14,8 @@ class Api::V1::PostsController < Api::V1::BaseController
      post.assign_attributes(post_params)
 
     if post.update_attributes(post_params)
-      #render json: post, status: 200
-      render :json => @topic.to_json( :include =>  :posts ), status: 200
+
+      render :json => @topic.to_json( :include =>  :post ), status: 200
     else
       render json: {error: "Post update failed", status: 400}, status: 400
     end
@@ -23,17 +23,18 @@ class Api::V1::PostsController < Api::V1::BaseController
    end
 
 
+
+
    def create
 
-     topic = Topic.find(params[:topic_id])
-     post = topic.post.build(post_params)
-     post.assign_attributes(post_params)
+     @topic = Topic.find(params[:topic_id])
+     @post = @topic.posts.build(post_params)
 
-     if post.valid?
-       post.save!
-       render :json => @topic.to_json( :include =>  :posts ), status: 200
+     if @post.valid?
+        @post.save!
+        render :json => @topic.to_json( :include =>  :post ), status: 200
      else
-       render json: {error: "Post is invalid", status: 400}, status: 400
+        render json: {error: "Post is invalid", status: 400}, status: 400
      end
 
    end
@@ -42,6 +43,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
    def destroy
 
+     @topic = Topic.find(params[:topic_id])
      post = Post.find(params[:id])
 
     if post.destroy

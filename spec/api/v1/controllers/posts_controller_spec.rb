@@ -13,12 +13,12 @@ require 'rails_helper'
 
 
      it "PUT update returns http unauthenticated" do
-       put :update, topic_id: my_topic.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
+       put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
        expect(response).to have_http_status(401)
      end
 
      it "POST create returns http unauthenticated" do
-       post :create, topic_id: my_topic.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
+       post :create, topic_id: my_topic.id,  post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
        expect(response).to have_http_status(401)
      end
 
@@ -39,12 +39,12 @@ require 'rails_helper'
      end
 
      it "PUT update returns http forbidden" do
-         put :update, topic_id: my_topic.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
+         put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
          expect(response).to have_http_status(403)
        end
 
        it "POST create returns http forbidden" do
-         post :create, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
+         post :create, topic_id: my_topic.id,  id: my_post.id, post: {title: "Post Title", body: "Post Body needs to be 20 chars"}
          expect(response).to have_http_status(403)
        end
 
@@ -67,8 +67,9 @@ require 'rails_helper'
         @new_post = build(:post)
       end
 
+
    describe "PUT update" do
-     before { put :update, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} }
+     before { put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} }
 
 
      it "returns http success" do
@@ -79,14 +80,14 @@ require 'rails_helper'
        expect(response.content_type).to eq 'application/json'
      end
 
-     it "updates a topic with the correct attributes" do
+     it "updates a post with the correct attributes" do
        updated_post = Post.find(my_post.id)
        expect(response.body).to eq(updated_post.to_json)
      end
    end
 
    describe "POST create" do
-     before { post :create, topic: {name: @new_topic.name, description: @new_topic.description} }
+     before { post :create, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} }
 
      it "returns http success" do
        expect(response).to have_http_status(:success)
@@ -105,7 +106,7 @@ require 'rails_helper'
 
 
    describe "DELETE destroy" do
-      before { delete :destroy, id: my_post.id }
+      before { delete :destroy, topic_id: my_topic.id, id: my_post.id}
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -126,4 +127,3 @@ require 'rails_helper'
 
  end
  end
- 
