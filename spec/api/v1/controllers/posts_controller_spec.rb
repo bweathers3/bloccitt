@@ -65,6 +65,9 @@ require 'rails_helper'
         my_user.admin!
         controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
         @new_post = build(:post)
+        @old_title = @new_post.title
+        @old_body = @new_post.body
+
       end
 
 
@@ -82,14 +85,14 @@ require 'rails_helper'
 
      it "updates a post with the correct attributes" do
        updated_post = Post.find(my_post.id)
-       expect(response.body).to eq(updated_post.to_json)
+       expect(@new_post.body).to eq(updated_post.body)
      end
    end
 
    describe "POST create" do
-     before { post :create, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body} }
+     before { post :create, topic_id: my_topic.id,  post: {title: @new_post.title, body: @new_post.body} }
 
-     it "returns http success" do
+     it "returns http success", focus: true do
        expect(response).to have_http_status(:success)
      end
 

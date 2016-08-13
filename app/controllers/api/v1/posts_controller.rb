@@ -1,4 +1,5 @@
 
+
 require 'rails_helper'
 
 class Api::V1::PostsController < Api::V1::BaseController
@@ -8,12 +9,11 @@ class Api::V1::PostsController < Api::V1::BaseController
 
 
    def update
-          @post = Post.find(params[:id])
 
-
+     @post = Post.find(params[:id])
      #@topic = Topic.find(params[:topic_id])
      #post = Post.find(params[:id])
-     #post.assign_attributes(post_params)
+     @post.update_attributes(post_params)
 
 
     if @post.save
@@ -30,12 +30,15 @@ class Api::V1::PostsController < Api::V1::BaseController
 
    def create
 
-     @post = Post.new
      @topic = Topic.find(params[:topic_id])
-     @post.topic = @topic
+     @post = @topic.posts.build(post_params)
+     @post.user = current_user
 
+
+
+     #@post = Post.new
      #@topic = Topic.find(params[:topic_id])
-     #@post = @topic.posts.build(post_params)
+     #@post.topic = @topic
 
      if @post.valid?
         @post.save!
@@ -67,7 +70,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
       def post_params
-        params.require(:POST).permit(:title, :body)
+        params.require(:post).permit(:title, :body)
       end
 
 end
