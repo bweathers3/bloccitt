@@ -28,6 +28,9 @@ class Api::V1::TopicsController < Api::V1::BaseController
 
    end
 
+
+
+
    def create
 
      topic = Topic.new(topic_params)
@@ -40,6 +43,10 @@ class Api::V1::TopicsController < Api::V1::BaseController
      end
 
    end
+
+
+
+
 
    def destroy
 

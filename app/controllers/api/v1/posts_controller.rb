@@ -11,17 +11,16 @@ class Api::V1::PostsController < Api::V1::BaseController
    def update
 
      @post = Post.find(params[:id])
+     @post.update_attributes(post_params)
      #@topic = Topic.find(params[:topic_id])
      #post = Post.find(params[:id])
-     @post.update_attributes(post_params)
 
 
-    if @post.save
-
-      render :json => @post.to_json( :include =>  :topic ), status: 200
-    else
-      render json: {error: "Post update failed", status: 400}, status: 400
-    end
+      if @post.save
+        render :json => @post.to_json( :include =>  :topic ), status: 200
+      else
+        render json: {error: "Post update failed", status: 400}, status: 400
+      end
 
    end
 
@@ -32,20 +31,14 @@ class Api::V1::PostsController < Api::V1::BaseController
 
      @topic = Topic.find(params[:topic_id])
      @post = @topic.posts.build(post_params)
-     @post.user = current_user
+     @post.user = @current_user
 
 
-
-     #@post = Post.new
-     #@topic = Topic.find(params[:topic_id])
-     #@post.topic = @topic
-
-     if @post.valid?
+     if   @post.valid?
         @post.save!
-
-        render :json => @post.to_json( :include =>  :topic ), status: 200
-     else
-        render json: {error: "Post is invalid", status: 400}, status: 400
+            render :json => @post.to_json( :include =>  :topic ), status: 200
+      else
+            render json: {error: "Post is invalid", status: 400}, status: 400
      end
 
    end
@@ -74,8 +67,3 @@ class Api::V1::PostsController < Api::V1::BaseController
       end
 
 end
-
-      #@topic = Topic.find(params[:id])
-      #render json: topic, status: 200
-      #render :json => @topic.to_json( :include =>  :posts ), status: 200
-      #format.json { render json: @post.to_json(:include => :comments) }

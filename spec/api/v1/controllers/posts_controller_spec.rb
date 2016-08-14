@@ -67,6 +67,7 @@ require 'rails_helper'
         @new_post = build(:post)
         @old_title = @new_post.title
         @old_body = @new_post.body
+        @current_user = my_user.id
 
       end
 
@@ -90,7 +91,7 @@ require 'rails_helper'
    end
 
    describe "POST create" do
-     before { post :create, topic_id: my_topic.id,  post: {title: @new_post.title, body: @new_post.body} }
+     before { post :create,  topic_id: my_topic.id,  post: {title: @new_post.title, body: @new_post.body } }
 
      it "returns http success", focus: true do
        expect(response).to have_http_status(:success)
