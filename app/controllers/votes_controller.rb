@@ -13,7 +13,7 @@ def up_vote
     end
 end
 
-
+## thanks Richard for all the extra help
 
 def down_vote
     update_vote(-1)
