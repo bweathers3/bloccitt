@@ -30,10 +30,6 @@ RSpec.describe TopicsController, type: :controller do
       expect(assigns(:topics)).to eq([my_topic, my_private_topic])
     end
 
-    #it "does not include private topics in @topics" do
-         #get :index
-         #expect(assigns(:topics)).not_to include(my_private_topic)
-       #end
   end
 
   ###########
